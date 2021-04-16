@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_wanandroid/provider/theme_provider.dart';
 import 'package:flutter_wanandroid/res/strings.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/widgets/overscroll_behavior.dart';
 
-import 'package:provider/provider.dart';
-
-import 'latest/latest_page.dart';
-import 'popular/popular_page.dart';
+import 'latest_page.dart';
+import 'palaza_page.dart';
+import 'popular_page.dart';
+import 'questions_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -17,11 +15,15 @@ class HomePage extends StatefulWidget {
   createState() => new _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+class _HomePageState extends State<HomePage>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin<HomePage> {
   var _controller; //tab控制器
   var _scrollController; //tab控制器
 
   int _currentIndex = 0; //选中下标
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -33,6 +35,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return new Scaffold(
         backgroundColor: context.backgroundColor,
         body: new NestedScrollView(
@@ -110,8 +113,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       child: TabBarView(controller: _controller, children: [
         PopularPage(),
         LatestPage(),
-        Text("1"),
-        Text("1"),
+        PalzaPage(),
+        QuestionsPage(),
         Text("1"),
         Text("1")
       ]),

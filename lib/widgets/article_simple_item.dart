@@ -6,8 +6,8 @@ import 'package:flutter_wanandroid/utils/string_util.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/utils/toast_util.dart';
 
-class ArticleItem extends StatefulWidget {
-  const ArticleItem({Key key, this.article, this.itemCallback})
+class ArticleSimpleItem extends StatefulWidget {
+  const ArticleSimpleItem({Key key, this.article, this.itemCallback})
       : super(key: key);
 
   final Article article;
@@ -15,10 +15,10 @@ class ArticleItem extends StatefulWidget {
   final GestureTapCallback itemCallback;
 
   @override
-  createState() => _ArticleItemState();
+  createState() => _ArticleSimpleItemState();
 }
 
-class _ArticleItemState extends State<ArticleItem> {
+class _ArticleSimpleItemState extends State<ArticleSimpleItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -34,65 +34,7 @@ class _ArticleItemState extends State<ArticleItem> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Offstage(
-                    child: Padding(
-                        padding: EdgeInsets.only(right: 10),
-                        child: Text(
-                          "置顶",
-                          style: TextStyle(
-                              color: Theme.of(context).errorColor,
-                              fontSize: 12),
-                        )),
-                    offstage: !widget.article.top,
-                  ),
-                  Padding(
-                      padding: EdgeInsets.only(right: 10),
-                      child: Text(
-                        widget.article.author.isNotEmpty
-                            ? widget.article.author
-                            : widget.article.shareUser,
-                        style:
-                            TextStyle(color: context.textColor, fontSize: 12),
-                      )),
-                  Offstage(
-                    child: Container(
-                        padding: EdgeInsets.all(1),
-                        decoration: BoxDecoration(
-                          border:
-                              Border.all(color: context.textColor, width: 0.8),
-                          //边框
-                          borderRadius: BorderRadius.all(
-                            //圆角
-                            Radius.circular(2.0),
-                          ),
-                        ),
-                        child: Text(
-                          widget.article.tags.isEmpty
-                              ? ""
-                              : widget.article.tags[0].name,
-                          style:
-                              TextStyle(color: context.textColor, fontSize: 10),
-                        )),
-                    offstage: widget.article.tags.isEmpty,
-                  ),
-                  Expanded(
-                      child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        formChapter(widget.article),
-                        style:
-                            TextStyle(color: context.hintColor, fontSize: 12),
-                      )
-                    ],
-                  ))
-                ],
-              ),
               Container(
-                margin: EdgeInsets.only(top: 12),
                 child: Text(
                   widget.article.title.htmlToSpanned(),
                   maxLines: 2,
@@ -102,19 +44,6 @@ class _ArticleItemState extends State<ArticleItem> {
                       fontSize: 14,
                       fontWeight: FontWeight.w500),
                 ),
-              ),
-              Offstage(
-                child: Container(
-                  margin: EdgeInsets.only(top: 8),
-                  child: Text(
-                    widget.article.desc.htmlToSpanned(),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: context.textSecondaryColor, fontSize: 13),
-                  ),
-                ),
-                offstage: widget.article.desc.isEmpty,
               ),
               Container(
                 child: Row(
@@ -130,6 +59,15 @@ class _ArticleItemState extends State<ArticleItem> {
                           )),
                       offstage: !widget.article.fresh,
                     ),
+                    Padding(
+                        padding: EdgeInsets.only(right: 10),
+                        child: Text(
+                          widget.article.author.isNotEmpty
+                              ? widget.article.author
+                              : widget.article.shareUser,
+                          style:
+                              TextStyle(color: context.textColor, fontSize: 12),
+                        )),
                     Padding(
                         padding: EdgeInsets.only(right: 10),
                         child: Text(
@@ -164,16 +102,6 @@ class _ArticleItemState extends State<ArticleItem> {
             ],
           ),
         ));
-  }
-
-  formChapter(Article article) {
-    if (article.superChapterName.isEmpty) {
-      return article.chapterName.htmlToSpanned();
-    } else if (article.chapterName.isEmpty) {
-      return article.superChapterName.htmlToSpanned();
-    } else {
-      return "${article.superChapterName.htmlToSpanned()}/${article.chapterName.htmlToSpanned()}";
-    }
   }
 
   Future<void> _onCollect(int id, bool isCollect) async {

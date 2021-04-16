@@ -5,31 +5,33 @@ import 'package:flutter_wanandroid/entity/article_entity.dart';
 import 'package:flutter_wanandroid/network/dio_manager.dart';
 import 'package:flutter_wanandroid/provider/base_list_provider.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
-import 'package:flutter_wanandroid/utils/string_util.dart';
 import 'package:flutter_wanandroid/widgets/article_item.dart';
 import 'package:flutter_wanandroid/widgets/my_refresh_list.dart';
 import 'package:flutter_wanandroid/widgets/state_layout.dart';
 import 'package:provider/provider.dart';
 
-class PopularPage extends StatefulWidget {
-  const PopularPage({Key key}) : super(key: key);
+/// home/问答
+class QuestionsPage extends StatefulWidget {
+  const QuestionsPage({Key key}) : super(key: key);
 
   @override
-  createState() => new _PopularPageState();
+  createState() => new _QuestionsPageState();
 }
 
-class _PopularPageState extends State<PopularPage> {
+class _QuestionsPageState extends State<QuestionsPage>
+    with AutomaticKeepAliveClientMixin<QuestionsPage> {
+
   var provider = BaseListProvider<Article>();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-      new GlobalKey<RefreshIndicatorState>();
+  new GlobalKey<RefreshIndicatorState>();
   int _page = 0;
 
-  var articleList = <Article>[];
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
     super.initState();
-    // _onRefresh();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       _refreshIndicatorKey.currentState?.show();
     });
@@ -37,6 +39,7 @@ class _PopularPageState extends State<PopularPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ChangeNotifierProvider<BaseListProvider<Article>>(
       create: (_) => provider,
       child: Container(
@@ -48,7 +51,7 @@ class _PopularPageState extends State<PopularPage> {
             removeTop: true,
             context: context,
             child: RefreshListView(
-              key: const Key('order_search_list'),
+              key: const Key('questions_list'),
               refreshIndicatorKey: _refreshIndicatorKey,
               itemCount: provider.list.length,
               stateType: provider.stateType,
@@ -56,7 +59,7 @@ class _PopularPageState extends State<PopularPage> {
               loadMore: _loadMore,
               hasMore: provider.hasMore,
               itemBuilder: (_, index) {
-                return ArticleItme(
+                return ArticleItem(
                     article: provider.list[index], itemCallback: () {});
               },
             ),
@@ -66,19 +69,9 @@ class _PopularPageState extends State<PopularPage> {
     );
   }
 
-  formChapter(Article article) {
-    if (article.superChapterName.isEmpty) {
-      return article.chapterName.htmlToSpanned();
-    } else if (article.chapterName.isEmpty) {
-      return article.superChapterName.htmlToSpanned();
-    } else {
-      return "${article.superChapterName.htmlToSpanned()}/${article.chapterName.htmlToSpanned()}";
-    }
-  }
-
   Future<void> _onRefresh() async {
     _page = 0;
-    await _getTopArticleList();
+    await _getArticleList()();
   }
 
   Future<void> _loadMore() async {
@@ -86,29 +79,13 @@ class _PopularPageState extends State<PopularPage> {
     await _getArticleList();
   }
 
-  ///获取置顶文章
-  _getTopArticleList() {
-    DioManager.get<List<Article>>(API.ARTICLE_LIST_TOP, {}, (data) {
-      if (data != null) {
-        provider.list.clear();
-        data.forEach((data) {
-          data.top = true;
-        });
-        provider.addAll(data);
-      }
-      _getArticleList();
-    }, (error) {
-      /// 加载失败
-      provider.setHasMore(false);
-      provider.setStateType(StateType.network);
-    });
-  }
-
   _getArticleList() {
-    DioManager.get<ArticleList>(API.ARTICLE_LIST + "$_page/json", {}, (data) {
+    DioManager.get<ArticleList>(API.QUESTIONS_ARTICLE_LIST + "$_page/json", {}, (data) {
       if (data != null) {
         provider.setHasMore(!data.over);
         if (_page == 0) {
+          provider.list.clear();
+
           /// 刷新
           if (data.datas.isEmpty) {
             provider.setStateType(StateType.empty);
@@ -118,7 +95,6 @@ class _PopularPageState extends State<PopularPage> {
         } else {
           provider.addAll(data.datas);
         }
-        setState(() {});
       } else {
         /// 加载失败
         provider.setHasMore(false);

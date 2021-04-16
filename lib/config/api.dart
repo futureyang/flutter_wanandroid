@@ -11,6 +11,12 @@ class API {
   //首页文章列表
   static const String ARTICLE_LIST = "article/list/";
 
+  //问答
+  static const String QUESTIONS_ARTICLE_LIST = "/wenda/list/";
+
+  //广场
+  static const String USER_ARTICLE_LIST = "/user_article/list/";
+
   //体系数据
   static const String TREE = "tree/json";
 
