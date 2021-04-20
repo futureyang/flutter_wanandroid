@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_wanandroid/pages/main/home/wechat_page.dart';
 import 'package:flutter_wanandroid/res/strings.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/widgets/overscroll_behavior.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_wanandroid/widgets/overscroll_behavior.dart';
 import 'latest_page.dart';
 import 'palaza_page.dart';
 import 'popular_page.dart';
+import 'project_page.dart';
 import 'questions_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -115,8 +117,8 @@ class _HomePageState extends State<HomePage>
         LatestPage(),
         PalzaPage(),
         QuestionsPage(),
-        Text("1"),
-        Text("1")
+        ProjectPage(),
+        WeChatPage()
       ]),
     );
   }

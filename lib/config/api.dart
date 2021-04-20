@@ -6,16 +6,16 @@ class API {
   static const String BANNER = "banner/json";
 
   //首页文章列表
-  static const String ARTICLE_LIST_TOP = "/article/top/json";
+  static const String ARTICLE_LIST_TOP = "article/top/json";
 
   //首页文章列表
   static const String ARTICLE_LIST = "article/list/";
 
   //问答
-  static const String QUESTIONS_ARTICLE_LIST = "/wenda/list/";
+  static const String QUESTIONS_ARTICLE_LIST = "wenda/list/";
 
   //广场
-  static const String USER_ARTICLE_LIST = "/user_article/list/";
+  static const String USER_ARTICLE_LIST = "user_article/list/";
 
   //体系数据
   static const String TREE = "tree/json";
@@ -28,6 +28,12 @@ class API {
 
   //项目列表数据
   static const String PROJECT_LIST = "project/list/";
+
+  //公众号分类
+  static const String WECHAT = "wxarticle/chapters/json";
+
+  //公众号分类
+  static const String WECHAT_LIST = "wxarticle/list/";
 
   //登录
   static const String LOGIN = "user/login";

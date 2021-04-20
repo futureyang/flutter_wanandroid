@@ -44,6 +44,7 @@ class ThemeProvider extends ChangeNotifier {
       primaryColor: isDarkMode ? MyColor.colorPrimaryNight : MyColor.colorPrimaryLight,
       accentColor: isDarkMode ? MyColor.colorAccentNight : MyColor.colorAccentLight,
       hintColor : isDarkMode ? MyColor.textColorThirdNight : MyColor.textColorThirdLight,
+      errorColor: isDarkMode ? MyColor.colorBadgeNight : MyColor.colorBadgeLight,
       // Tab指示器颜色
       indicatorColor: isDarkMode ? MyColor.colorPrimaryNight : MyColor.colorPrimaryLight,
       // 页面背景色
