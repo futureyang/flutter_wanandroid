@@ -49,9 +49,18 @@ dependencies:
   dio_cookie_manager: ^2.0.0
   # 查找文件系统路径 https://pub.dev/packages/path_provider
   path_provider: 2.0.1
+  # 数据库 https://pub.flutter-io.cn/packages/floor_generator/changelog
+  floor: ^1.0.0
+  # 消息传递 EventBus https://pub.dev/packages/event_bus
+  event_bus: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  # 数据库
+  floor_generator: ^1.0.0
+  build_runner: ^1.12.2
 
 flutter:
 

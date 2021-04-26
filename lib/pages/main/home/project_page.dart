@@ -125,7 +125,7 @@ class _ProjectPageState extends State<ProjectPage>
 
   Future<void> _onRefresh() async {
     _page = 0;
-    await _getArticleList()();
+    await _getArticleList();
   }
 
   Future<void> _loadMore() async {

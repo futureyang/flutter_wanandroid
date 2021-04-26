@@ -3,17 +3,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_wanandroid/network/dio_manager.dart';
+import 'package:flutter_wanandroid/pages/main/home/home_page.dart';
 import 'package:flutter_wanandroid/pages/main_page.dart';
+import 'package:flutter_wanandroid/pages/search/search_page.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 
 class SplashPage extends StatefulWidget {
   SplashPage({Key key}) : super(key: key);
 
   @override
-  createState() => SplashPageState();
+  createState() => _SplashPageState();
 }
 
-class SplashPageState extends State<SplashPage>
+class _SplashPageState extends State<SplashPage>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation _animation;

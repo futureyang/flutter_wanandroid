@@ -7,7 +7,6 @@ import 'package:flutter_wanandroid/config/api.dart';
 import 'package:flutter_wanandroid/config/common.dart';
 import 'package:flutter_wanandroid/entity/userinfo_entity.dart';
 import 'package:flutter_wanandroid/network/dio_manager.dart';
-import 'package:flutter_wanandroid/network/entity_factory.dart';
 import 'package:flutter_wanandroid/res/colors.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/utils/toast_util.dart';

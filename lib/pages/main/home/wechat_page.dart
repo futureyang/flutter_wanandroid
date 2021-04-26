@@ -21,11 +21,10 @@ class WeChatPage extends StatefulWidget {
 
 class _WeChatPageState extends State<WeChatPage>
     with AutomaticKeepAliveClientMixin<WeChatPage> {
-
   var categoryList = <Category>[];
   var provider = BaseListProvider<Article>();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-  new GlobalKey<RefreshIndicatorState>();
+      new GlobalKey<RefreshIndicatorState>();
   int _page = 0;
   int _checkCategoryId = 0;
 
@@ -68,24 +67,24 @@ class _WeChatPageState extends State<WeChatPage>
               Expanded(
                 child: Consumer<BaseListProvider<Article>>(
                     builder: (_, provider, __) {
-                      return MediaQuery.removePadding(
-                        removeTop: true,
-                        context: context,
-                        child: RefreshListView(
-                          key: const Key('latest_list'),
-                          refreshIndicatorKey: _refreshIndicatorKey,
-                          itemCount: provider.list.length,
-                          stateType: provider.stateType,
-                          onRefresh: _onRefresh,
-                          loadMore: _loadMore,
-                          hasMore: provider.hasMore,
-                          itemBuilder: (_, index) {
-                            return ArticleItem(
-                                article: provider.list[index], itemCallback: () {});
-                          },
-                        ),
-                      );
-                    }),
+                  return MediaQuery.removePadding(
+                    removeTop: true,
+                    context: context,
+                    child: RefreshListView(
+                      key: const Key('latest_list'),
+                      refreshIndicatorKey: _refreshIndicatorKey,
+                      itemCount: provider.list.length,
+                      stateType: provider.stateType,
+                      onRefresh: _onRefresh,
+                      loadMore: _loadMore,
+                      hasMore: provider.hasMore,
+                      itemBuilder: (_, index) {
+                        return ArticleItem(
+                            article: provider.list[index], itemCallback: () {});
+                      },
+                    ),
+                  );
+                }),
               )
             ],
           )),
@@ -100,11 +99,11 @@ class _WeChatPageState extends State<WeChatPage>
         decoration: BoxDecoration(
           color: isSelect
               ? context.isDark
-              ? MyColor.bgColorThirdNight
-              : MyColor.bgColorThirdLight
+                  ? MyColor.bgColorThirdNight
+                  : MyColor.bgColorThirdLight
               : context.isDark
-              ? MyColor.bgColorSecondaryNight
-              : MyColor.bgColorSecondaryLight,
+                  ? MyColor.bgColorSecondaryNight
+                  : MyColor.bgColorSecondaryLight,
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
         padding: EdgeInsets.only(left: 13, right: 13),
@@ -126,7 +125,7 @@ class _WeChatPageState extends State<WeChatPage>
 
   Future<void> _onRefresh() async {
     _page = 0;
-    await _getArticleList()();
+    await _getArticleList();
   }
 
   Future<void> _loadMore() async {

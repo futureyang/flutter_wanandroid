@@ -71,7 +71,7 @@ class _QuestionsPageState extends State<QuestionsPage>
 
   Future<void> _onRefresh() async {
     _page = 0;
-    await _getArticleList()();
+    await _getArticleList();
   }
 
   Future<void> _loadMore() async {

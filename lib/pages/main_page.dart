@@ -10,18 +10,16 @@ import 'package:provider/provider.dart';
 import 'login/registered_page.dart';
 import 'main/hierarchy/hierarchy_page.dart';
 import 'main/home/home_page.dart';
-import 'main/navigation/navigation_page.dart';
-import 'main/mine/mine_page.dart';
 import 'main_provider.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key key}) : super(key: key);
 
   @override
-  createState() => new MainPageState();
+  createState() => new _MainPageState();
 }
 
-class MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage> {
   final appBarTitles = ['主页', '购买商标', '在线咨询', '我的'];
   List<Widget> _pageList;
 

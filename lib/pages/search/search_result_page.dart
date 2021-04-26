@@ -3,28 +3,34 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_wanandroid/config/api.dart';
 import 'package:flutter_wanandroid/entity/article_entity.dart';
 import 'package:flutter_wanandroid/network/dio_manager.dart';
+import 'package:flutter_wanandroid/pages/search/search_page.dart';
 import 'package:flutter_wanandroid/provider/base_list_provider.dart';
-import 'package:flutter_wanandroid/utils/theme_utils.dart';
+import 'package:flutter_wanandroid/utils/event_bus_util.dart';
 import 'package:flutter_wanandroid/widgets/article_item.dart';
-import 'package:flutter_wanandroid/widgets/article_simple_item.dart';
 import 'package:flutter_wanandroid/widgets/my_refresh_list.dart';
 import 'package:flutter_wanandroid/widgets/state_layout.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_wanandroid/utils/theme_utils.dart';
 
-/// home/广场
-class PalzaPage extends StatefulWidget {
-  const PalzaPage({Key key}) : super(key: key);
+class SearchResultPage extends StatefulWidget {
+  String searchValue;
+
+  SearchResultPage({Key key, this.searchValue: ""}) : super(key: key);
 
   @override
-  createState() => new _PalzaPageState();
+  State<StatefulWidget> createState() {
+    return _SearchResultPageState();
+  }
 }
 
-class _PalzaPageState extends State<PalzaPage>
-    with AutomaticKeepAliveClientMixin<PalzaPage> {
+class _SearchResultPageState extends State<SearchResultPage>
+    with AutomaticKeepAliveClientMixin<SearchResultPage> {
   var provider = BaseListProvider<Article>();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-  new GlobalKey<RefreshIndicatorState>();
+      new GlobalKey<RefreshIndicatorState>();
   int _page = 0;
+
+  var searchEvent;
 
   @override
   bool get wantKeepAlive => true;
@@ -40,6 +46,14 @@ class _PalzaPageState extends State<PalzaPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
+    searchEvent = eventBus.on<SearchEvent>((event) {
+      if (event.type == 1) {
+        widget.searchValue = event.searchValue;
+        _refreshIndicatorKey.currentState?.show();
+      }
+    });
+
     return ChangeNotifierProvider<BaseListProvider<Article>>(
       create: (_) => provider,
       child: Container(
@@ -51,18 +65,17 @@ class _PalzaPageState extends State<PalzaPage>
             removeTop: true,
             context: context,
             child: RefreshListView(
-              key: const Key('plaza_list'),
-              refreshIndicatorKey: _refreshIndicatorKey,
-              itemCount: provider.list.length,
-              stateType: provider.stateType,
-              onRefresh: _onRefresh,
-              loadMore: _loadMore,
-              hasMore: provider.hasMore,
-              itemBuilder: (_, index) {
-                return ArticleSimpleItem(
-                    article: provider.list[index], itemCallback: () {});
-              },
-            ),
+                key: const Key('search_result_lsit'),
+                refreshIndicatorKey: _refreshIndicatorKey,
+                itemCount: provider.list.length,
+                stateType: provider.stateType,
+                onRefresh: _onRefresh,
+                loadMore: _loadMore,
+                hasMore: provider.hasMore,
+                itemBuilder: (_, index) {
+                  return ArticleItem(
+                      article: provider.list[index], itemCallback: () {});
+                }),
           );
         }),
       ),
@@ -80,11 +93,13 @@ class _PalzaPageState extends State<PalzaPage>
   }
 
   _getArticleList() {
-    DioManager.get<ArticleList>(API.USER_ARTICLE_LIST + "$_page/json", {}, (data) {
+    DioManager.post<ArticleList>(
+        API.QUERY + "$_page/json", {"k": widget.searchValue}, (data) {
       if (data != null) {
         provider.setHasMore(!data.over);
         if (_page == 0) {
           provider.list.clear();
+
           /// 刷新
           if (data.datas.isEmpty) {
             provider.setStateType(StateType.empty);
@@ -104,5 +119,11 @@ class _PalzaPageState extends State<PalzaPage>
       provider.setHasMore(false);
       provider.setStateType(StateType.network);
     });
+  }
+
+  @override
+  void dispose() {
+    eventBus.off(searchEvent);
+    super.dispose();
   }
 }
