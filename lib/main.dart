@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_wanandroid/router/routers.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,7 @@ void main() async {
   runApp(MyApp());
   //隐藏状态栏
   SystemChrome.setEnabledSystemUIOverlays([]);
+  Routes.initRoutes();
 }
 
 class MyApp extends StatelessWidget {

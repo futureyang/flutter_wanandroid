@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/pages/search/search_history_page.dart';
 import 'package:flutter_wanandroid/pages/search/search_result_page.dart';
+import 'package:flutter_wanandroid/router/fluro_navigator.dart';
 import 'package:flutter_wanandroid/utils/event_bus_util.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/widgets/search_bar.dart';
 
 class SearchPage extends StatefulWidget {
+  const SearchPage({Key key}) : super(key: key);
+
   @override
   createState() => _SearchPageState();
 }
@@ -31,7 +34,7 @@ class _SearchPageState extends State<SearchPage> {
       appBar: SearchBar(
         onBack: () {
           if (childWidgets.length < 2) {
-            Navigator.maybePop(context);
+            NavigatorUtils.goBack(context);
             return;
           }
           setState(() {

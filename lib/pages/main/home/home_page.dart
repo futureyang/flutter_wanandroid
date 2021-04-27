@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/pages/main/home/wechat_page.dart';
 import 'package:flutter_wanandroid/res/strings.dart';
+import 'package:flutter_wanandroid/router/fluro_navigator.dart';
+import 'package:flutter_wanandroid/router/routers.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/widgets/overscroll_behavior.dart';
 
@@ -78,6 +80,9 @@ class _HomePageState extends State<HomePage>
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20)),
               color: Colors.black12)),
+      onTap: () {
+        NavigatorUtils.push(context, Routes.searchPage);
+      },
     );
   }
 
