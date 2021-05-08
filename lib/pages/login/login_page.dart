@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert' as convert;
 
 import 'package:flustars/flustars.dart';

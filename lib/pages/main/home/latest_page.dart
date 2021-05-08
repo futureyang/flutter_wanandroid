@@ -58,8 +58,7 @@ class _LatestPageState extends State<LatestPage>
               loadMore: _loadMore,
               hasMore: provider.hasMore,
               itemBuilder: (_, index) {
-                return ArticleItem(
-                    article: provider.list[index], itemCallback: () {});
+                return ArticleItem(provider.list[index]);
               },
             ),
           );
@@ -84,6 +83,7 @@ class _LatestPageState extends State<LatestPage>
         provider.setHasMore(!data.over);
         if (_page == 0) {
           provider.list.clear();
+
           /// 刷新
           if (data.datas.isEmpty) {
             provider.setStateType(StateType.empty);

@@ -55,7 +55,10 @@ dependencies:
   event_bus: ^2.0.0
   # 路由框架 https://github.com/theyakka/fluro
   fluro: ^2.0.3
-
+  # WebView插件 https://github.com/flutter/plugins/tree/master/packages/webview_flutter
+  webview_flutter: 2.0.2
+  # 分享 https://github.com/flutter/plugins/tree/master/packages/share
+  share: ^0.6.1+1
 
 dev_dependencies:
   flutter_test:

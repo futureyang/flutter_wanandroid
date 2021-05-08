@@ -73,8 +73,7 @@ class _SearchResultPageState extends State<SearchResultPage>
                 loadMore: _loadMore,
                 hasMore: provider.hasMore,
                 itemBuilder: (_, index) {
-                  return ArticleItem(
-                      article: provider.list[index], itemCallback: () {});
+                  return ArticleItem(provider.list[index]);
                 }),
           );
         }),

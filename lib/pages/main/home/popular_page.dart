@@ -60,8 +60,7 @@ class _PopularPageState extends State<PopularPage>
               loadMore: _loadMore,
               hasMore: provider.hasMore,
               itemBuilder: (_, index) {
-                return ArticleItem(
-                    article: provider.list[index], itemCallback: () {});
+                return ArticleItem(provider.list[index]);
               },
             ),
           );

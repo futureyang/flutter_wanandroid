@@ -79,8 +79,7 @@ class _WeChatPageState extends State<WeChatPage>
                       loadMore: _loadMore,
                       hasMore: provider.hasMore,
                       itemBuilder: (_, index) {
-                        return ArticleItem(
-                            article: provider.list[index], itemCallback: () {});
+                        return ArticleItem(provider.list[index]);
                       },
                     ),
                   );

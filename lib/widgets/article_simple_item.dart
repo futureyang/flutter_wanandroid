@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/config/api.dart';
 import 'package:flutter_wanandroid/entity/article_entity.dart';
 import 'package:flutter_wanandroid/network/dio_manager.dart';
+import 'package:flutter_wanandroid/router/fluro_navigator.dart';
 import 'package:flutter_wanandroid/utils/string_util.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/utils/toast_util.dart';
 
 class ArticleSimpleItem extends StatefulWidget {
-  const ArticleSimpleItem({Key key, this.article, this.itemCallback})
+  const ArticleSimpleItem(this.article, {Key key})
       : super(key: key);
 
   final Article article;
-
-  final GestureTapCallback itemCallback;
 
   @override
   createState() => _ArticleSimpleItemState();
@@ -22,7 +21,10 @@ class _ArticleSimpleItemState extends State<ArticleSimpleItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: widget.itemCallback,
+        onTap: () {
+          NavigatorUtils.goDetailPage(
+              context, widget.article.title, widget.article.link);
+        },
         child: Container(
           decoration: new BoxDecoration(
             color: context.backgroundColor,

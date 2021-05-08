@@ -23,7 +23,7 @@ class _PalzaPageState extends State<PalzaPage>
     with AutomaticKeepAliveClientMixin<PalzaPage> {
   var provider = BaseListProvider<Article>();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-  new GlobalKey<RefreshIndicatorState>();
+      new GlobalKey<RefreshIndicatorState>();
   int _page = 0;
 
   @override
@@ -59,8 +59,7 @@ class _PalzaPageState extends State<PalzaPage>
               loadMore: _loadMore,
               hasMore: provider.hasMore,
               itemBuilder: (_, index) {
-                return ArticleSimpleItem(
-                    article: provider.list[index], itemCallback: () {});
+                return ArticleSimpleItem(provider.list[index]);
               },
             ),
           );
@@ -80,11 +79,13 @@ class _PalzaPageState extends State<PalzaPage>
   }
 
   _getArticleList() {
-    DioManager.get<ArticleList>(API.USER_ARTICLE_LIST + "$_page/json", {}, (data) {
+    DioManager.get<ArticleList>(API.USER_ARTICLE_LIST + "$_page/json", {},
+        (data) {
       if (data != null) {
         provider.setHasMore(!data.over);
         if (_page == 0) {
           provider.list.clear();
+
           /// 刷新
           if (data.datas.isEmpty) {
             provider.setStateType(StateType.empty);
