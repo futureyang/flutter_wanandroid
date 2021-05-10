@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/res/gaps.dart';
 import 'package:flutter_wanandroid/utils/device_utils.dart';
+import 'package:flutter_wanandroid/widgets/title_bar.dart';
 import 'package:share/share.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter_wanandroid/utils/theme_utils.dart';
 
 class DetailPage extends StatefulWidget {
   final String url, title;
@@ -49,22 +49,13 @@ class _DetailPageState extends State<DetailPage> {
               return Future.value(true);
             },
             child: Scaffold(
-              appBar: AppBar(
-                title: Text(widget.title),
-                elevation: 2,
-                actions: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.share,
-                      size: 20,
-                      color: context.textColor,
-                    ),
-                    tooltip: '分享',
-                    onPressed: () {
-                      Share.share('【${widget.title}】\n${widget.title}');
-                    },
-                  ),
-                ],
+              appBar: TitleBar(
+                title: widget.title,
+                icon: Icons.share,
+                isShowRight: true,
+                onRight: () {
+                  Share.share('【${widget.title}】\n${widget.title}');
+                },
               ),
               body: Stack(
                 children: [
