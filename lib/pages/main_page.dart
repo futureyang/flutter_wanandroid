@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_wanandroid/pages/login/login_page.dart';
+import 'package:flutter_wanandroid/pages/main/navigation/navigation_page.dart';
 import 'package:flutter_wanandroid/res/colors.dart';
 import 'package:flutter_wanandroid/res/strings.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/widgets/double_tap_back_exit_app.dart';
 
 import 'package:provider/provider.dart';
-import 'login/registered_page.dart';
 import 'main/hierarchy/hierarchy_page.dart';
 import 'main/home/home_page.dart';
 import 'main_provider.dart';
@@ -30,7 +30,7 @@ class _MainPageState extends State<MainPage> {
     _pageList = [
       const HomePage(),
       const HierarchyPage(),
-      const RegisteredPage(),
+      const NavigationPage(),
       const LoginPage()
     ];
   }

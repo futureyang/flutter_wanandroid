@@ -2,24 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_wanandroid/config/api.dart';
 import 'package:flutter_wanandroid/entity/article_entity.dart';
+import 'package:flutter_wanandroid/entity/category_entity.dart';
 import 'package:flutter_wanandroid/network/dio_manager.dart';
 import 'package:flutter_wanandroid/provider/base_list_provider.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
-import 'package:flutter_wanandroid/widgets/article_item.dart';
+import 'package:flutter_wanandroid/widgets/article_simple_item.dart';
 import 'package:flutter_wanandroid/widgets/my_refresh_list.dart';
 import 'package:flutter_wanandroid/widgets/state_layout.dart';
 import 'package:provider/provider.dart';
 
-/// home/最新
-class LatestPage extends StatefulWidget {
-  const LatestPage({Key key}) : super(key: key);
+/// 体系子页
+class HierarchyListPage extends StatefulWidget {
+  Category category;
+
+  HierarchyListPage(Category this.category, {Key key}) : super(key: key);
 
   @override
-  createState() => new _LatestPageState();
+  createState() => new _HierarchyListPageState();
 }
 
-class _LatestPageState extends State<LatestPage>
-    with AutomaticKeepAliveClientMixin<LatestPage> {
+class _HierarchyListPageState extends State<HierarchyListPage>
+    with AutomaticKeepAliveClientMixin<HierarchyListPage> {
   var provider = BaseListProvider<Article>();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
@@ -50,7 +53,7 @@ class _LatestPageState extends State<LatestPage>
             removeTop: true,
             context: context,
             child: RefreshListView(
-              key: const Key('latest_list'),
+              key: const Key('plaza_list'),
               refreshIndicatorKey: _refreshIndicatorKey,
               itemCount: provider.list.length,
               stateType: provider.stateType,
@@ -58,7 +61,7 @@ class _LatestPageState extends State<LatestPage>
               loadMore: _loadMore,
               hasMore: provider.hasMore,
               itemBuilder: (_, index) {
-                return ArticleItem(provider.list[index]);
+                return ArticleSimpleItem(provider.list[index]);
               },
             ),
           );
@@ -78,11 +81,13 @@ class _LatestPageState extends State<LatestPage>
   }
 
   _getArticleList() {
-    DioManager.get<ArticleList>(API.ARTICLE_LIST + "$_page/json", {}, (data) {
+    DioManager.get<ArticleList>(
+        API.ARTICLE_LIST + "$_page/json", {"cid": widget.category.id}, (data) {
       if (data != null) {
         provider.setHasMore(!data.over);
         if (_page == 0) {
           provider.list.clear();
+
           /// 刷新
           if (data.datas.isEmpty) {
             provider.setStateType(StateType.empty);

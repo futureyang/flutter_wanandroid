@@ -50,7 +50,7 @@ class _DetailPageState extends State<DetailPage> {
             },
             child: Scaffold(
               appBar: TitleBar(
-                title: widget.title,
+                widget.title,
                 icon: Icons.share,
                 isShowRight: true,
                 onRight: () {

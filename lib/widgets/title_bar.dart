@@ -10,9 +10,8 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
   final Function() onRight;
   final Widget rightWidget;
 
-  const TitleBar(
+  const TitleBar(this.title,
       {Key key,
-      this.title,
       this.onRight,
       this.icon,
       this.isShowRight = false,
@@ -75,9 +74,7 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
             Align(
               alignment: Alignment.bottomLeft,
               child: Container(
-                color: context.isDark
-                    ? MyColor.colorRippleNight
-                    : MyColor.colorRippleLight,
+                color: context.shadowColor,
                 height: 2.0,
               ),
             )

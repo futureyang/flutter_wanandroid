@@ -16,6 +16,7 @@ class SearchBar extends StatefulWidget implements PreferredSizeWidget {
   final Function() onBack;
   final Function(String) onSearch;
   final TextEditingController controller;
+
   @override
   _SearchBarState createState() => _SearchBarState();
 
@@ -115,20 +116,21 @@ class _SearchBarState extends State<SearchBar> {
     );
 
     return SafeArea(
-      child: Column(
-        children: [
-          Row(
-            children: <Widget>[back, textField, search],
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Container(
-              color: context.isDark ? MyColor.colorRippleNight : MyColor.colorRippleLight,
-              height: 2.0,
-            ),
-          )
-        ],
-      ),
-    );
+        child: Container(
+            color: context.backgroundColor,
+            child: Column(
+              children: [
+                Row(
+                  children: <Widget>[back, textField, search],
+                ),
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Container(
+                    color: context.shadowColor,
+                    height: 2.0,
+                  ),
+                )
+              ],
+            )));
   }
 }

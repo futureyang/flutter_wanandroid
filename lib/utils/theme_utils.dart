@@ -73,6 +73,7 @@ extension ThemeExtension on BuildContext {
   Color get textColor => Theme.of(this).textTheme.bodyText1.color;
   Color get textSecondaryColor => Theme.of(this).textTheme.bodyText2.color;
   Color get hintColor => Theme.of(this).hintColor;
+  Color get shadowColor => Theme.of(this).shadowColor;
   double get statusBarHeight => MediaQuery.of(this).padding.top;
 
 }

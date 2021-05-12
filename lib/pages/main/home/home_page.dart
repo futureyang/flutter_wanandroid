@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/pages/main/home/wechat_page.dart';
+import 'package:flutter_wanandroid/res/colors.dart';
 import 'package:flutter_wanandroid/res/strings.dart';
 import 'package:flutter_wanandroid/router/fluro_navigator.dart';
 import 'package:flutter_wanandroid/router/routers.dart';
@@ -48,13 +49,15 @@ class _HomePageState extends State<HomePage>
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 new SliverAppBar(
-                    title: _toobar(),
-                    pinned: true,
-                    floating: true,
-                    forceElevated: innerBoxIsScrolled,
-                    bottom: _tabBar(),
-                    elevation: 2,
-                    shadowColor: context.hintColor),
+                  title: _toobar(),
+                  pinned: true,
+                  floating: true,
+                  forceElevated: innerBoxIsScrolled,
+                  bottom: _tabBar(),
+                  elevation: 3,
+                  shadowColor: context.shadowColor,
+                  backgroundColor: context.backgroundColor,
+                ),
               ];
             },
             body: _tabBarView()));
