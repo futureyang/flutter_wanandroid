@@ -3,11 +3,10 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_wanandroid/config/api.dart';
 import 'package:flutter_wanandroid/entity/article_entity.dart';
 import 'package:flutter_wanandroid/entity/banner_entity.dart' as Banner;
-import 'package:flutter_wanandroid/entity/category_entity.dart';
-import 'package:flutter_wanandroid/entity/hotword_entity.dart';
 import 'package:flutter_wanandroid/entity/navigation_entity.dart';
 import 'package:flutter_wanandroid/network/dio_manager.dart';
 import 'package:flutter_wanandroid/res/colors.dart';
+import 'package:flutter_wanandroid/router/fluro_navigator.dart';
 import 'package:flutter_wanandroid/utils/toast_util.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/widgets/banner_bar.dart';
@@ -181,8 +180,8 @@ class _NavigationPageState extends State<NavigationPage>
                       style: TextStyle(color: context.textColor, fontSize: 13),
                     )),
                 onTap: () {
-                  // _addSearchHistory(hotWordList[index].name);
-                  // eventBus.emit(SearchEvent(hotWordList[index].name, 2));
+                  NavigatorUtils.goDetailPage(
+                      context, articles[index].title, articles[index].link);
                 },
               );
             }) //要显示的子控件集合

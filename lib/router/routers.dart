@@ -16,6 +16,16 @@ class Routes {
 
   static String detailPage = '/detail';
 
+  static String pointsPage = '/mind/points';
+  static String rankingPage = '/mind/ranking';
+  static String sharePage = '/mind/share';
+  static String collectPage = '/mind/collect';
+  static String historyPage = '/mind/history';
+  static String openSourcePage = '/mind/source';
+  static String aboutAuthorPage = '/mind/author';
+  static String settingPage = '/mind/setting';
+
+
   static final FluroRouter router = FluroRouter();
 
   static void initRoutes() {

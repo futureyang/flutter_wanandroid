@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_wanandroid/pages/login/login_page.dart';
+import 'package:flutter_wanandroid/pages/main/hierarchy/hierarchy_page.dart';
+import 'package:flutter_wanandroid/pages/main/home/home_page.dart';
+import 'package:flutter_wanandroid/pages/main/mine/mine_page.dart';
 import 'package:flutter_wanandroid/pages/main/navigation/navigation_page.dart';
 import 'package:flutter_wanandroid/res/colors.dart';
 import 'package:flutter_wanandroid/res/strings.dart';
@@ -8,8 +10,6 @@ import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/widgets/double_tap_back_exit_app.dart';
 
 import 'package:provider/provider.dart';
-import 'main/hierarchy/hierarchy_page.dart';
-import 'main/home/home_page.dart';
 import 'main_provider.dart';
 
 class MainPage extends StatefulWidget {
@@ -31,7 +31,7 @@ class _MainPageState extends State<MainPage> {
       const HomePage(),
       const HierarchyPage(),
       const NavigationPage(),
-      const LoginPage()
+      const MinePage()
     ];
   }
 
@@ -39,7 +39,8 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     //显示状态栏
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top, SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIOverlays(
+        [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     initData();
   }
 

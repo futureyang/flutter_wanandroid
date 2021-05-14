@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_wanandroid/entity/banner_entity.dart' as Banner;
+import 'package:flutter_wanandroid/router/fluro_navigator.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/widgets/overscroll_behavior.dart';
 
@@ -60,8 +61,8 @@ class BannerBar extends StatelessWidget implements PreferredSizeWidget {
             //两侧item的缩放比
             scale: 0.9,
             onTap: (int index) {
-              //点击事件，返回下标
-              print("index-----" + index.toString());
+              NavigatorUtils.goDetailPage(
+                  context, bannerDatas[index].title, bannerDatas[index].url);
             },
           ),
         ),
