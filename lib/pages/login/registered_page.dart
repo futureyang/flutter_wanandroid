@@ -9,6 +9,9 @@ import 'package:flutter_wanandroid/entity/userinfo_entity.dart';
 import 'package:flutter_wanandroid/network/dio_manager.dart';
 import 'package:flutter_wanandroid/network/entity_factory.dart';
 import 'package:flutter_wanandroid/res/colors.dart';
+import 'package:flutter_wanandroid/router/fluro_navigator.dart';
+import 'package:flutter_wanandroid/router/routers.dart';
+import 'package:flutter_wanandroid/utils/login_util.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/utils/toast_util.dart';
 
@@ -117,7 +120,8 @@ class _RegisteredPageState extends State<RegisteredPage> {
       "repassword": passwordConfirm
     };
     DioManager.post<UserInfo>(API.REGISTER, registeredMap, (data) {
-      SpUtil.putString(Constant.userInfo, convert.jsonEncode(data));
+      LoginUtil.saveUserInfo(data);
+      NavigatorUtils.push(context, Routes.main, clearStack: true);
     }, (error) {
       Toast.show(error.errorMsg);
     });

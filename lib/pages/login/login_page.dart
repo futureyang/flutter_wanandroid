@@ -7,6 +7,9 @@ import 'package:flutter_wanandroid/config/common.dart';
 import 'package:flutter_wanandroid/entity/userinfo_entity.dart';
 import 'package:flutter_wanandroid/network/dio_manager.dart';
 import 'package:flutter_wanandroid/res/colors.dart';
+import 'package:flutter_wanandroid/router/fluro_navigator.dart';
+import 'package:flutter_wanandroid/router/routers.dart';
+import 'package:flutter_wanandroid/utils/login_util.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/utils/toast_util.dart';
 
@@ -27,12 +30,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.backgroundColor,
-      appBar: new AppBar(),
       body: Container(
         child: Center(
             child: Column(
           children: [
-            SizedBox(height: 30),
+            SizedBox(height: 80 + context.statusBarHeight),
             Icon(
               Icons.android_rounded,
               size: 110,
@@ -60,7 +62,9 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text("去注册",
                           style: TextStyle(
                               color: context.textColor, fontSize: 13))),
-                  onTap: () {},
+                  onTap: () {
+                    NavigatorUtils.push(context, Routes.registeredPage);
+                  },
                 )),
             _LoginBtn(context)
           ],
@@ -109,9 +113,8 @@ class _LoginPageState extends State<LoginPage> {
       "password": password,
     };
     DioManager.post<UserInfo>(API.LOGIN, loginMap, (data) {
-      SpUtil.putString(Constant.userInfo, convert.jsonEncode(data));
-      // UserInfo userInfo = EntityFactory.generateOBJ<UserInfo>(
-      //     convert.jsonDecode(SpUtil.getString(Constant.userInfo)));
+      LoginUtil.saveUserInfo(data);
+      NavigatorUtils.push(context, Routes.main, clearStack: true);
     }, (error) {
       Toast.show(error.errorMsg);
     });

@@ -21,6 +21,7 @@ class RefreshListView extends StatefulWidget {
     this.padding,
     this.itemExtent,
     this.refreshIndicatorKey,
+    this.physics,
   }) : super(key: key);
 
   final RefreshCallback onRefresh;
@@ -30,6 +31,7 @@ class RefreshListView extends StatefulWidget {
   final IndexedWidgetBuilder itemBuilder;
   final StateType stateType;
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey;
+  final ScrollPhysics physics;
 
   /// 一页的数量
   final int pageSize;
@@ -64,6 +66,7 @@ class _RefreshListViewState extends State<RefreshListView> {
                       : widget.itemCount + 1,
                   padding: widget.padding,
                   shrinkWrap: true,
+                  physics: widget.physics,
                   itemBuilder: (BuildContext context, int index) {
                     /// 不需要加载更多则不需要添加FootView
                     if (widget.loadMore == null) {

@@ -1,5 +1,4 @@
 import 'package:flutter_wanandroid/entity/article_entity.dart';
-import 'package:floor/floor.dart';
 
 articleListFromJson(ArticleList data, Map<String, dynamic> json) {
 	if (json['offset'] != null) {

@@ -62,4 +62,12 @@ class API {
   //取消收藏-收藏页面
   static const String UN_COLLECT = "lg/uncollect/";
 
+  //我的积分
+  static const String POINTS = "lg/coin/userinfo/json";
+
+  //积分记录
+  static const String POINTS_RECORD = "lg/coin/list/";
+
+  //积分排行
+  static const String POINTS_RANK = "coin/rank/";
 }

@@ -43,6 +43,8 @@ class StateLayout extends StatelessWidget {
   }
 
   Widget _noData(BuildContext context) {
+
+
     return Container(
       child: Column(
         children: [

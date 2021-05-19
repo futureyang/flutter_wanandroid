@@ -6,6 +6,8 @@ import 'package:flutter_wanandroid/network/dio_manager.dart';
 import 'package:flutter_wanandroid/pages/main/home/home_page.dart';
 import 'package:flutter_wanandroid/pages/main_page.dart';
 import 'package:flutter_wanandroid/pages/search/search_page.dart';
+import 'package:flutter_wanandroid/router/fluro_navigator.dart';
+import 'package:flutter_wanandroid/router/routers.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 
 class SplashPage extends StatefulWidget {
@@ -31,12 +33,7 @@ class _SplashPageState extends State<SplashPage>
     _animation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         // 动画完成了
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) {
-          return MainPage();
-        }), (route) {
-          return route == null;
-        });
+        NavigatorUtils.push(context, Routes.main, clearStack: true);
       }
     });
     // 动画开始

@@ -4,6 +4,9 @@ import 'package:flutter_wanandroid/pages/detail/detail_page.dart';
 import 'package:flutter_wanandroid/pages/login/login_page.dart';
 import 'package:flutter_wanandroid/pages/login/registered_page.dart';
 import 'package:flutter_wanandroid/pages/search/search_page.dart';
+import 'package:flutter_wanandroid/pages/user/collection_page.dart';
+import 'package:flutter_wanandroid/pages/user/integrals_page.dart';
+import 'package:flutter_wanandroid/pages/user/ranking_page.dart';
 import 'package:flutter_wanandroid/router/404.dart';
 import 'package:flutter_wanandroid/pages/main_page.dart';
 
@@ -16,7 +19,7 @@ class Routes {
 
   static String detailPage = '/detail';
 
-  static String pointsPage = '/mind/points';
+  static String integralPage = '/mind/integral';
   static String rankingPage = '/mind/ranking';
   static String sharePage = '/mind/share';
   static String collectPage = '/mind/collect';
@@ -49,5 +52,11 @@ class Routes {
       final String url = params['url']?.first;
       return DetailPage(title: title, url: url);
     }));
+    router.define(collectPage,
+        handler: Handler(handlerFunc: (_, __) => const CollectionPage()));
+    router.define(integralPage,
+        handler: Handler(handlerFunc: (_, __) => const IntegralsPage()));
+    router.define(rankingPage,
+        handler: Handler(handlerFunc: (_, __) => const RankingPage()));
   }
 }
