@@ -8,19 +8,19 @@ import 'package:flutter_wanandroid/utils/string_util.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/utils/toast_util.dart';
 
-class ArticleSimpleItem extends StatefulWidget {
-  const ArticleSimpleItem(this.article, {Key key, this.onLong})
+class ArticleEntitySimpleItem extends StatefulWidget {
+  const ArticleEntitySimpleItem(this.article, {Key key, this.onLong})
       : super(key: key);
 
-  final Article article;
+  final ArticleEntity article;
 
   final Function() onLong;
 
   @override
-  createState() => _ArticleSimpleItemState();
+  createState() => _ArticleEntitySimpleItemState();
 }
 
-class _ArticleSimpleItemState extends State<ArticleSimpleItem> {
+class _ArticleEntitySimpleItemState extends State<ArticleEntitySimpleItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,7 +29,7 @@ class _ArticleSimpleItemState extends State<ArticleSimpleItem> {
             return DetailPage(
                 title: widget.article.title,
                 url: widget.article.link,
-                article: widget.article);
+                article: Article().fromJson(widget.article.toJson()));
           }));
         },
         onLongPress: widget.onLong,
@@ -84,25 +84,25 @@ class _ArticleSimpleItemState extends State<ArticleSimpleItem> {
                           style:
                               TextStyle(color: context.textColor, fontSize: 12),
                         )),
-                    Expanded(
-                        child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            _onCollect(
-                                widget.article.id, widget.article.collect);
-                          },
-                          child: Icon(
-                            widget.article.collect
-                                ? Icons.star
-                                : Icons.star_border,
-                            color: context.hintColor,
-                            size: 20,
-                          ),
-                        )
-                      ],
-                    ))
+                    // Expanded(
+                    //     child: Row(
+                    //   mainAxisAlignment: MainAxisAlignment.end,
+                    //   children: [
+                    //     GestureDetector(
+                    //       onTap: () {
+                    //         _onCollect(
+                    //             widget.article.id, widget.article.collect);
+                    //       },
+                    //       child: Icon(
+                    //         widget.article.collect
+                    //             ? Icons.star
+                    //             : Icons.star_border,
+                    //         color: context.hintColor,
+                    //         size: 20,
+                    //       ),
+                    //     )
+                    //   ],
+                    // ))
                   ],
                 ),
               ),
@@ -111,7 +111,7 @@ class _ArticleSimpleItemState extends State<ArticleSimpleItem> {
         ));
   }
 
-  formAuthor(Article article) {
+  formAuthor(ArticleEntity article) {
     if (article.author.isNotEmpty) {
       return article.author;
     } else if (article.shareUser.isNotEmpty) {

@@ -74,6 +74,9 @@ class _CollectionPageState extends State<CollectionPage> {
     DioManager.get<ArticleList>(API.COLLECT_LIST + "$_page/json", {}, (data) {
       if (data != null) {
         provider.setHasMore(!data.over);
+        for (int i = 0; i < data.datas.length; i++) {
+          data.datas[i].collect = true;
+        }
         if (_page == 0) {
           provider.list.clear();
 

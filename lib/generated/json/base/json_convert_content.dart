@@ -55,6 +55,8 @@ class JsonConvert<T> {
 				return articleFromJson(data as Article, json) as T;
 			case Tag:
 				return tagFromJson(data as Tag, json) as T;
+			case ShareArticleList:
+				return shareArticleListFromJson(data as ShareArticleList, json) as T;
 			case Navigation:
 				return navigationFromJson(data as Navigation, json) as T;
 			case HotWord:
@@ -86,6 +88,8 @@ class JsonConvert<T> {
 				return articleToJson(data as Article);
 			case Tag:
 				return tagToJson(data as Tag);
+			case ShareArticleList:
+				return shareArticleListToJson(data as ShareArticleList);
 			case Navigation:
 				return navigationToJson(data as Navigation);
 			case HotWord:
@@ -118,6 +122,8 @@ class JsonConvert<T> {
 			return Article().fromJson(json);
 		}	else if(type == (Tag).toString()){
 			return Tag().fromJson(json);
+		}	else if(type == (ShareArticleList).toString()){
+			return ShareArticleList().fromJson(json);
 		}	else if(type == (Navigation).toString()){
 			return Navigation().fromJson(json);
 		}	else if(type == (HotWord).toString()){
@@ -150,6 +156,8 @@ class JsonConvert<T> {
 			return data.map<Article>((e) => Article().fromJson(e)).toList() as M;
 		}	else if(<Tag>[] is M){
 			return data.map<Tag>((e) => Tag().fromJson(e)).toList() as M;
+		}	else if(<ShareArticleList>[] is M){
+			return data.map<ShareArticleList>((e) => ShareArticleList().fromJson(e)).toList() as M;
 		}	else if(<Navigation>[] is M){
 			return data.map<Navigation>((e) => Navigation().fromJson(e)).toList() as M;
 		}	else if(<HotWord>[] is M){

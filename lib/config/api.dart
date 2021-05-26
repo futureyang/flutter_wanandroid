@@ -70,4 +70,13 @@ class API {
 
   //积分排行
   static const String POINTS_RANK = "coin/rank/";
+
+  //我的分享
+  static const String SHARED_ARTICLE_LIST = "user/lg/private_articles/";
+
+  //我的分享
+  static const String DELETE_SHARED = "lg/user_article/delete/";
+
+  //提交分享
+  static const String ADD_SHARED = "lg/user_article/add/json";
 }

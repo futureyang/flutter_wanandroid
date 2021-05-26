@@ -4,8 +4,12 @@ import 'package:flutter_wanandroid/pages/detail/detail_page.dart';
 import 'package:flutter_wanandroid/pages/login/login_page.dart';
 import 'package:flutter_wanandroid/pages/login/registered_page.dart';
 import 'package:flutter_wanandroid/pages/search/search_page.dart';
+import 'package:flutter_wanandroid/pages/share/share_list_page.dart';
+import 'package:flutter_wanandroid/pages/share/share_page.dart';
 import 'package:flutter_wanandroid/pages/user/collection_page.dart';
+import 'package:flutter_wanandroid/pages/user/history_page.dart';
 import 'package:flutter_wanandroid/pages/user/integrals_page.dart';
+import 'package:flutter_wanandroid/pages/user/open_source_page.dart';
 import 'package:flutter_wanandroid/pages/user/ranking_page.dart';
 import 'package:flutter_wanandroid/router/404.dart';
 import 'package:flutter_wanandroid/pages/main_page.dart';
@@ -22,12 +26,12 @@ class Routes {
   static String integralPage = '/mind/integral';
   static String rankingPage = '/mind/ranking';
   static String sharePage = '/mind/share';
+  static String shareListPage = '/mind/share/list';
   static String collectPage = '/mind/collect';
   static String historyPage = '/mind/history';
   static String openSourcePage = '/mind/source';
   static String aboutAuthorPage = '/mind/author';
   static String settingPage = '/mind/setting';
-
 
   static final FluroRouter router = FluroRouter();
 
@@ -58,5 +62,17 @@ class Routes {
         handler: Handler(handlerFunc: (_, __) => const IntegralsPage()));
     router.define(rankingPage,
         handler: Handler(handlerFunc: (_, __) => const RankingPage()));
+    router.define(shareListPage,
+        handler: Handler(handlerFunc: (_, __) => const ShareListPage()));
+    router.define(sharePage,
+        handler: Handler(handlerFunc: (_, __) => const SharePage()));
+    router.define(aboutAuthorPage,
+        handler: Handler(
+            handlerFunc: (_, __) => const DetailPage(
+                title: '关于作者', url: 'https://github.com/futureyang')));
+    router.define(openSourcePage,
+        handler: Handler(handlerFunc: (_, __) => const OpenSourcePage()));
+    router.define(historyPage,
+        handler: Handler(handlerFunc: (_, __) => const HistoryPage()));
   }
 }

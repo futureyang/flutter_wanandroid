@@ -5,6 +5,8 @@ import 'package:flutter_wanandroid/entity/pointrank_entity.dart';
 import 'package:flutter_wanandroid/entity/pointrecord_entity.dart';
 import 'package:flutter_wanandroid/network/dio_manager.dart';
 import 'package:flutter_wanandroid/provider/base_list_provider.dart';
+import 'package:flutter_wanandroid/router/fluro_navigator.dart';
+import 'package:flutter_wanandroid/router/routers.dart';
 import 'package:flutter_wanandroid/utils/toast_util.dart';
 import 'package:flutter_wanandroid/widgets/my_refresh_list.dart';
 import 'package:flutter_wanandroid/widgets/overscroll_behavior.dart';
@@ -43,7 +45,10 @@ class _IntegralsPageState extends State<IntegralsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: context.backgroundColor,
-        appBar: TitleBar('我的积分'),
+        appBar: TitleBar('我的积分',
+            isShowRight: true, icon: Icons.emoji_events_outlined, onRight: () {
+          NavigatorUtils.push(context, Routes.rankingPage);
+        }),
         body: ScrollConfiguration(
             behavior: OverScrollBehavior(),
             child: ListView(
@@ -114,7 +119,10 @@ class _IntegralsPageState extends State<IntegralsPage> {
                           TextStyle(color: context.textColor, fontSize: 14))),
               Padding(
                   padding: EdgeInsets.all(6),
-                  child: Text(pointRecord.desc,
+                  child: Text(
+                      DateTime.fromMillisecondsSinceEpoch(pointRecord.date)
+                          .toString()
+                          .replaceFirst(RegExp(r'.000'), ''),
                       style: TextStyle(
                           color: context.textSecondaryColor, fontSize: 12))),
             ]),

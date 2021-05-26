@@ -2,10 +2,8 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_wanandroid/db/db_manager.dart';
 import 'package:flutter_wanandroid/network/dio_manager.dart';
-import 'package:flutter_wanandroid/pages/main/home/home_page.dart';
-import 'package:flutter_wanandroid/pages/main_page.dart';
-import 'package:flutter_wanandroid/pages/search/search_page.dart';
 import 'package:flutter_wanandroid/router/fluro_navigator.dart';
 import 'package:flutter_wanandroid/router/routers.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
@@ -44,6 +42,7 @@ class _SplashPageState extends State<SplashPage>
   inin() async {
     await DioManager.getInstance();
     await SpUtil.getInstance();
+    await DataBaseManager();
   }
 
   @override

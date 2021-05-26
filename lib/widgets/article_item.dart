@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/config/api.dart';
 import 'package:flutter_wanandroid/entity/article_entity.dart';
 import 'package:flutter_wanandroid/network/dio_manager.dart';
-import 'package:flutter_wanandroid/router/fluro_navigator.dart';
+import 'package:flutter_wanandroid/pages/detail/detail_page.dart';
 import 'package:flutter_wanandroid/utils/string_util.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 import 'package:flutter_wanandroid/utils/toast_util.dart';
 
 class ArticleItem extends StatefulWidget {
-  const ArticleItem(this.article, {Key key})
-      : super(key: key);
+  const ArticleItem(this.article, {Key key, this.onLong}) : super(key: key);
 
   final Article article;
+
+  final Function() onLong;
 
   @override
   createState() => _ArticleItemState();
@@ -22,9 +23,14 @@ class _ArticleItemState extends State<ArticleItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          NavigatorUtils.goDetailPage(
-              context, widget.article.title, widget.article.link);
+          Navigator.push(context, MaterialPageRoute(builder: (_) {
+            return DetailPage(
+                title: widget.article.title,
+                url: widget.article.link,
+                article: widget.article);
+          }));
         },
+        onLongPress: widget.onLong,
         child: Container(
           decoration: new BoxDecoration(
             color: context.backgroundColor,
@@ -52,9 +58,7 @@ class _ArticleItemState extends State<ArticleItem> {
                   Padding(
                       padding: EdgeInsets.only(right: 10),
                       child: Text(
-                        widget.article.author.isNotEmpty
-                            ? widget.article.author
-                            : widget.article.shareUser,
+                        formAuthor(widget.article),
                         style:
                             TextStyle(color: context.textColor, fontSize: 12),
                       )),
@@ -119,6 +123,7 @@ class _ArticleItemState extends State<ArticleItem> {
                 offstage: widget.article.desc.isEmpty,
               ),
               Container(
+                margin: EdgeInsets.only(top: 15, bottom: 15),
                 child: Row(
                   children: [
                     Offstage(
@@ -141,23 +146,21 @@ class _ArticleItemState extends State<ArticleItem> {
                         )),
                     Expanded(
                         child: Row(
-                      mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        IconButton(
-                            onPressed: () {
-                              _onCollect(
-                                  widget.article.id, widget.article.collect);
-                            },
-                            tooltip: '收藏',
-                            icon: widget.article.collect
-                                ? Icon(
-                                    Icons.star,
-                                    color: context.hintColor,
-                                  )
-                                : Icon(Icons.star_border,
-                                    color: context.hintColor),
-                            iconSize: 20)
+                        GestureDetector(
+                          onTap: () {
+                            _onCollect(
+                                widget.article.id, widget.article.collect);
+                          },
+                          child: Icon(
+                            widget.article.collect
+                                ? Icons.star
+                                : Icons.star_border,
+                            color: context.hintColor,
+                            size: 20,
+                          ),
+                        )
                       ],
                     ))
                   ],
@@ -166,6 +169,15 @@ class _ArticleItemState extends State<ArticleItem> {
             ],
           ),
         ));
+  }
+
+  formAuthor(Article article) {
+    if (article.author.isNotEmpty) {
+      return article.author;
+    } else if (article.shareUser.isNotEmpty) {
+      return article.shareUser;
+    }
+    return '匿名';
   }
 
   formChapter(Article article) {

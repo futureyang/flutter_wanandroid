@@ -1,4 +1,6 @@
 import 'package:flutter_wanandroid/entity/article_entity.dart';
+import 'package:floor/floor.dart';
+import 'package:flutter_wanandroid/entity/pointrank_entity.dart';
 
 articleListFromJson(ArticleList data, Map<String, dynamic> json) {
 	if (json['offset'] != null) {
@@ -238,5 +240,22 @@ Map<String, dynamic> tagToJson(Tag entity) {
 	data['articleId'] = entity.articleId;
 	data['name'] = entity.name;
 	data['url'] = entity.url;
+	return data;
+}
+
+shareArticleListFromJson(ShareArticleList data, Map<String, dynamic> json) {
+	if (json['coinInfo'] != null) {
+		data.coinInfo = PointRank().fromJson(json['coinInfo']);
+	}
+	if (json['shareArticles'] != null) {
+		data.shareArticles = ArticleList().fromJson(json['shareArticles']);
+	}
+	return data;
+}
+
+Map<String, dynamic> shareArticleListToJson(ShareArticleList entity) {
+	final Map<String, dynamic> data = new Map<String, dynamic>();
+	data['coinInfo'] = entity.coinInfo?.toJson();
+	data['shareArticles'] = entity.shareArticles?.toJson();
 	return data;
 }

@@ -20,7 +20,7 @@ class _MinePageState extends State<MinePage>
     MineEntity(Icons.local_atm, "我的积分", Routes.integralPage, isLogin: true),
     MineEntity(Icons.emoji_events_outlined, "积分排行", Routes.rankingPage),
     MineEntity.empty(),
-    MineEntity(Icons.control_point, "我的分享", Routes.sharePage, isLogin: true),
+    MineEntity(Icons.control_point, "我的分享", Routes.shareListPage, isLogin: true),
     MineEntity(Icons.star_border, "我的收藏", Routes.collectPage, isLogin: true),
     MineEntity(Icons.restore, "浏览历史", Routes.historyPage),
     MineEntity.empty(),

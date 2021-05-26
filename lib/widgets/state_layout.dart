@@ -48,7 +48,8 @@ class StateLayout extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Icon(Icons.info_outline, size: 100, color: context.hintColor),
+          Icon(Icons.info_outline, size: 50, color: context.hintColor),
+          SizedBox(height: 20),
           Text(
             MyString.noData,
             style: Theme.of(context).textTheme.bodyText2,
@@ -79,5 +80,5 @@ enum StateType {
 extension StateTypeExtension on StateType {
 
   String get hintText =>
-      <String>['无网络连接', '加载中', '暂时没有数据', '', ''][index];
+      <String>['无网络连接', '加载中', '', '', ''][index];
 }
