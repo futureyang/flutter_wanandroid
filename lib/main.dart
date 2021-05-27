@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
   Widget _buildMaterialApp(ThemeProvider provider) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: '玩Android',
+      title: 'WanAndroid',
       themeMode: provider.getThemeMode(),
       theme: provider.getTheme(),
       darkTheme: provider.getTheme(isDarkMode: true),
