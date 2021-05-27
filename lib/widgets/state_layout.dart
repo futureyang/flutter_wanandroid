@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'load_image.dart';
 
-/// design/9暂无状态页面/index.html#artboard3
+/// 暂无状态页面
 class StateLayout extends StatelessWidget {
   const StateLayout({Key key, @required this.type, this.hintText})
       : super(key: key);

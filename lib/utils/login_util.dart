@@ -4,6 +4,7 @@ import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_wanandroid/config/common.dart';
 import 'package:flutter_wanandroid/entity/userinfo_entity.dart';
+import 'package:flutter_wanandroid/network/dio_manager.dart';
 import 'package:flutter_wanandroid/network/entity_factory.dart';
 import 'package:flutter_wanandroid/router/fluro_navigator.dart';
 import 'package:flutter_wanandroid/router/routers.dart';
@@ -31,5 +32,11 @@ class LoginUtil {
     } else {
       NavigatorUtils.push(context, Routes.loginPage);
     }
+  }
+
+  static outLogin(BuildContext context) {
+    SpUtil.remove(Constant.userInfo);
+    DioManager.clearCookie();
+    NavigatorUtils.push(context, Routes.main, clearStack: true);
   }
 }

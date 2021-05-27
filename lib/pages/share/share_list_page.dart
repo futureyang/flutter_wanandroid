@@ -97,7 +97,6 @@ class _ShareListPageState extends State<ShareListPage> {
         if (provider.list.length == 0) {
           provider.setStateType(StateType.empty);
         }
-        ;
         Navigator.pop(context, 'Cancel');
       },
     );

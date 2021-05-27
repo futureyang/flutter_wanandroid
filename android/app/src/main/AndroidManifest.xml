@@ -5,8 +5,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:label="flutter_wanandroid"
-        android:icon="@mipmap/ic_launcher">
+        android:label="WanAndroid"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

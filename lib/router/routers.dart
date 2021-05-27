@@ -4,6 +4,7 @@ import 'package:flutter_wanandroid/pages/detail/detail_page.dart';
 import 'package:flutter_wanandroid/pages/login/login_page.dart';
 import 'package:flutter_wanandroid/pages/login/registered_page.dart';
 import 'package:flutter_wanandroid/pages/search/search_page.dart';
+import 'package:flutter_wanandroid/pages/setting/setting_page.dart';
 import 'package:flutter_wanandroid/pages/share/share_list_page.dart';
 import 'package:flutter_wanandroid/pages/share/share_page.dart';
 import 'package:flutter_wanandroid/pages/user/collection_page.dart';
@@ -74,5 +75,7 @@ class Routes {
         handler: Handler(handlerFunc: (_, __) => const OpenSourcePage()));
     router.define(historyPage,
         handler: Handler(handlerFunc: (_, __) => const HistoryPage()));
+    router.define(settingPage,
+        handler: Handler(handlerFunc: (_, __) => const SettingPage()));
   }
 }

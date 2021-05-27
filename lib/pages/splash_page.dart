@@ -1,4 +1,3 @@
-import 'package:flustars/flustars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -40,8 +39,8 @@ class _SplashPageState extends State<SplashPage>
   }
 
   inin() async {
+    // await SpUtil.getInstance();
     await DioManager.getInstance();
-    await SpUtil.getInstance();
     await DataBaseManager();
   }
 
@@ -58,11 +57,12 @@ class _SplashPageState extends State<SplashPage>
         opacity: _animation,
         child: Container(
           color: context.backgroundColor,
-          padding: EdgeInsets.all(140),
-          child: Image.asset(
+          child: Center(
+              child: Image.asset(
             "assets/images/logo.png",
             color: context.textColor,
-          ),
+            width: MediaQuery.of(context).size.width * 0.5,
+          )),
         ));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_wanandroid/router/fluro_navigator.dart';
+import 'package:flutter_wanandroid/widgets/overscroll_behavior.dart';
 import 'package:flutter_wanandroid/widgets/title_bar.dart';
 import 'package:flutter_wanandroid/utils/theme_utils.dart';
 
@@ -36,18 +37,23 @@ class _OpenSourcePageState extends State<OpenSourcePage> {
         'FlutterSwiper', 'https://github.com/best-flutter/flutter_swiper'),
     OpenSourceEntity('StickyHeaders',
         'https://github.com/fluttercommunity/flutter_sticky_headers'),
+    OpenSourceEntity('PackageInfo',
+        'https://pub.flutter-io.cn/packages/package_info'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TitleBar('开源许可'),
-      body: ListView.builder(
-          shrinkWrap: true,
-          itemCount: datas.length,
-          itemBuilder: (context, index) {
-            return _item(index);
-          }),
+      body: ScrollConfiguration(
+        behavior: OverScrollBehavior(),
+        child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: datas.length,
+            itemBuilder: (context, index) {
+              return _item(index);
+            }),
+      ),
     );
   }
 
